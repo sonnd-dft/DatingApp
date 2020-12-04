@@ -18,7 +18,7 @@
             </li>
         </ul>
 
-        <div class="dropdown" *ngIf="loggedIn" dropdown>
+        <div class="dropdown" *ngIf="currentUser$ | async" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item">Edit profile</a>
@@ -27,7 +27,8 @@
             </div>
         </div>
 
-        <form *ngIf="!loggedIn" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)='login()' autocomplete="off">
+        <form *ngIf="(currentUser$ | async)===null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)='login()'
+            autocomplete="off">
             <input name="username" [(ngModel)]="model.username" class="form-control mr-sm-2" type="text"
                 placeholder="Username">
             <input name="password" [(ngModel)]="model.password" class="form-control mr-sm-2" type="password"
