@@ -1,0 +1,12 @@
+test postman
+
+const user=pm.response.json();
+
+pm.test("Has properties",function(){
+    pm.expect(user).to.have.property('username');
+    pm.expect(user).to.have.property('token');
+});
+
+if(pm.test("has properties")){
+    pm.globals.set('token',user.token);
+}
